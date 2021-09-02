@@ -1,0 +1,20 @@
+void input(std::istream& ins){
+    if (&ins == &cin){
+        // read from keyboard
+    }
+    else{
+        // read from file
+    
+    }
+}
+
+void input(std::istream& ins){
+    if (&ins == &cin){
+        // read from keyboard
+    }
+    else{
+        // read from file
+    
+    }
+}
+
