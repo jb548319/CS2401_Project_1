@@ -7,6 +7,7 @@
 	Patricia Lindner	Ohio University EECS	August 2021
 *************************************************************************/
 #include "check.h"
+#include <string>
 using namespace std;
 
 Check::Check(Date d, string p, int num,double amt){
@@ -22,6 +23,35 @@ void Check::write_check(std::istream& ins){
 	from the keyboard or a file. Remember to use getline to read the 
 	payto.  */
 
+	if (&ins == &cin){
+        cout << "Enter Check number: ";
+		ins >> checknum;
+
+		cout << "Enter date: ";
+		ins >> date;
+
+		cout << "Enter who check is payto: ";
+		while (ins.peek() == 10 || ins.peek() == 13){
+			ins.ignore();
+		}
+		getline(ins, payto);
+
+		cout << "Enter check amount: ";
+		ins >> amount;
+    }
+    else{
+		string junk;
+
+        ins >> checknum;
+		ins >> date;
+
+		while (ins.peek() == 10 || ins.peek() == 13){
+			ins.ignore();
+		}
+		getline(ins, payto);
+
+		ins >> amount;
+    }
 }
 
 void Check::output(std::ostream& outs)const{
@@ -29,6 +59,18 @@ void Check::output(std::ostream& outs)const{
 	to the monitor or to a file. Remember not to put labels into the 
 	file.*/
 
+	if (&outs == &cout){
+        outs << "Check number: " << checknum << endl;
+		outs << "Date: " << date << endl;
+		outs << "Payed to: " << payto << endl;
+		outs << "Amount: " << amount << endl;
+    }
+    else{
+        outs << checknum << endl;
+		outs << date << endl;
+		outs << payto << endl;
+		outs << amount << endl;
+    }
 }
 
 ostream& operator << (ostream& outs, const Check& c){

@@ -19,7 +19,7 @@ be using it to test your program.
 #include<fstream>
 #include<string>
 #include "check.h"
-//#include "checkbook.h"
+#include "checkbook.h"
 using namespace std;
 
 /* This function shows the user the menu, asks them to enter their 
@@ -45,9 +45,11 @@ int main(){
 
 	// if no file this is first running for this user
     if(!ifs.fail()){ 
-		//	mychecks.load_from_file(ifs);
+		mychecks.load_from_file(ifs);
 		ifs.close();
     }
+
+	mychecks.output(cout); // GET RID OF AT END-----------------------------------
 
     do{
 		choice = menu();
