@@ -24,28 +24,23 @@ void Check::write_check(std::istream& ins){
 	payto.  */
 
 	if (&ins == &cin){
-        cout << "Enter Check number: ";
-		ins >> checknum;
-
 		cout << "Enter date: ";
 		ins >> date;
 
-		cout << "Enter who check is payto: ";
-		while (ins.peek() == 10 || ins.peek() == 13){
+		cout << "Enter who is being payed: ";
+		while (ins.peek() == '\n' || ins.peek() == '\r'){
 			ins.ignore();
 		}
 		getline(ins, payto);
 
-		cout << "Enter check amount: ";
+		cout << "Enter check amount: $";
 		ins >> amount;
     }
     else{
-		string junk;
-
         ins >> checknum;
 		ins >> date;
 
-		while (ins.peek() == 10 || ins.peek() == 13){
+		while (ins.peek() == '\n' || ins.peek() == '\r'){
 			ins.ignore();
 		}
 		getline(ins, payto);
@@ -63,7 +58,7 @@ void Check::output(std::ostream& outs)const{
         outs << "Check number: " << checknum << endl;
 		outs << "Date: " << date << endl;
 		outs << "Payed to: " << payto << endl;
-		outs << "Amount: " << amount << endl;
+		outs << "Amount: $" << amount << endl;
     }
     else{
         outs << checknum << endl;

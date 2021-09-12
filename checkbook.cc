@@ -23,18 +23,35 @@ void Checkbook::load_from_file(istream& ins){
 }
 
 void Checkbook::deposit(double depamount){
-
+    balance += depamount;
 }
 
+//
 void Checkbook::write_check(istream& ins){
+    Check c;
+    if (&ins == &cin){
+        c.set_check_num (next_checknum);
+        c.write_check(ins);
+    }
+    else{
+        c.write_check(ins);
+    }
+    
+    checkbook[used] = c;
 
+    balance -= c.get_amount();
+    next_checknum++;
+    used++;
 }
 
+//
 void Checkbook::show_all(ostream& outs){
-
+    for (int i = 0; i < used; i++){
+        checkbook[i].output(outs);
+    }
 }
 
-void Checkbook::remove(int rmnum){
+void Checkbook::remove(int rm_num){
 
 }
 
@@ -55,11 +72,4 @@ void Checkbook::show(string payto_find){
 
 void Checkbook::save(ostream& outs){
 
-}
-
-void Checkbook::output(ostream& outs){
-    for (int i = 0; i < used; i++){
-        cout << "yup" << endl;
-        checkbook[i].output(outs);
-    }
 }

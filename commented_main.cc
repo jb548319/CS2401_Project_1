@@ -17,6 +17,7 @@ be using it to test your program.
 *************************************************************************/
 #include<iostream>
 #include<fstream>
+#include <iomanip>
 #include<string>
 #include "check.h"
 #include "checkbook.h"
@@ -33,8 +34,10 @@ int main(){
     string user,userfile;
     int choice;  // user menu choice
     double depamount;  // amount of a deposit
-    int rmnum;      // Check number to be removed from checkbook
+    int rm_num;      // Check number to be removed from checkbook
     string payto_find; // used in listing all checks to a certain entity
+
+	cout << fixed << setprecision(2);
 
     cout<<"Please enter your user name (No spaces): ";
     cin>>user;
@@ -49,28 +52,26 @@ int main(){
 		ifs.close();
     }
 
-	mychecks.output(cout); // GET RID OF AT END-----------------------------------
-
     do{
 		choice = menu();
 		switch(choice){
 			case 1:
 				cout<<"Please enter amount of the deposit:$";
 				cin>>depamount;
-				//mychecks.deposit(depamount);
+				mychecks.deposit(depamount);
 				break;
 			case 2:
-				//mychecks.write_check(cin);
+				mychecks.write_check(cin);
 				break;
 			case 3:
-				//cout<<mychecks.get_balance();
+				cout << "Checkbook Balance: $"<< mychecks.get_balance() << endl;
 				break;
 			case 4:
-				//mychecks.show_all(cout);
+				mychecks.show_all(cout);
 				break;
 			case 5:
 				cout<<"Enter the Check Number of the Check to be removed:";
-				cin>>rmnum;
+				cin>>rm_num;
 				//mychecks.remove(rmnum);
 				break;
 			case 6:
@@ -101,11 +102,11 @@ int main(){
 		} // bottom of the switch
     } while(choice != 0);
 
-	ofs.open(userfile.c_str());
-	if(!ofs.fail()){
+	//ofs.open(userfile.c_str());
+	//if(!ofs.fail()){
 		//mychecks.save(ofs);
-	    ofs.close();
-	}
+	    //ofs.close();
+	//}
 
 	return 0;
 }
