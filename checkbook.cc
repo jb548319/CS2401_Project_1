@@ -26,7 +26,6 @@ void Checkbook::deposit(double depamount){
     balance += depamount;
 }
 
-//
 void Checkbook::write_check(istream& ins){
     Check c;
     if (&ins == &cin){
@@ -44,7 +43,6 @@ void Checkbook::write_check(istream& ins){
     used++;
 }
 
-//
 void Checkbook::show_all(ostream& outs){
     for (int i = 0; i < used; i++){ 
         checkbook[i].output(outs);
@@ -52,22 +50,12 @@ void Checkbook::show_all(ostream& outs){
 }
 
 void Checkbook::remove(int rm_num){
-    Check tmp[SIZE];
-    Check c;
-    int tmp_used = 0;
-
-    for (int i = 0; i < used; i++){
-        if (checkbook[i].get_num() != rm_num){
-            tmp[tmp_used] = checkbook[i];
-            tmp_used++;
+    for (int i = 0; i < used; i++){ 
+        if (checkbook[i].get_num() == rm_num){
+            checkbook[i] = checkbook[used - 1];
+            used--;
         }
     }
-
-    for (int j = 0; j < tmp_used; j++){
-        checkbook[j] = tmp[j];
-        checkbook[j + 1] = c;
-    }
-    used = tmp_used;
 }
 
 void Checkbook::number_sort(){

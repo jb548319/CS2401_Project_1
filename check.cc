@@ -47,7 +47,8 @@ void Check::write_check(std::istream& ins){
 
 		ins >> amount;
 
-		while (ins.peek() == '\n' || ins.peek() == '\r'){
+		// this ignores the \n or \r between each check or eof
+		while (ins.peek() == '\n' || ins.peek() == '\r'){ 
 			ins.ignore();
 		}
     }
