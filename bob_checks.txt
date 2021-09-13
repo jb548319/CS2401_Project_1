@@ -1,8 +1,16 @@
-4351.65
+3989.77
 
-3
+5
 
 1
+
+9/5/2017
+
+Ohio University
+
+2345.75
+
+3
 
 9/5/2017
 
@@ -10,10 +18,19 @@ Dave's Carryout
 
 18.49
 
+4
+
+9/9/2021
+
+Jonah Brautigam
+
+1423.36
+
 2
 
-9/5/2017
+9/11/2021
 
-Ohio University
+Trent Langenkamp
 
-2345.75
+562.35
+

@@ -14,7 +14,7 @@ void Checkbook::load_from_file(istream& ins){
 
     ins >> balance;
     ins >> next_checknum;
-    while (!ins.eof()){
+    for (int i = 0; i < (next_checknum - 1); i++){
         c.write_check(ins);
 
         checkbook[used] = c;
@@ -56,20 +56,88 @@ void Checkbook::remove(int rm_num){
 }
 
 void Checkbook::number_sort(){
+    int i, j, smallSp;
+    Check tmp;
 
+    for (i = 0; i < used - 1; i++){
+        smallSp = i;
+
+        for (j = i + 1; j < used; j++){
+            if (checkbook[j].get_num() < checkbook[smallSp].get_num()){
+                smallSp = j;
+            }
+        }
+
+        tmp = checkbook[i];
+        checkbook[i] = checkbook[smallSp];
+        checkbook[smallSp] = tmp;
+    }
 }
-void Checkbook::payto_sort(){
 
+void Checkbook::payto_sort(){
+    int i, j, smallSp;
+    Check tmp;
+
+    for (i = 0; i < used - 1; i++){
+        smallSp = i;
+
+        for (j = i + 1; j < used; j++){
+            if (checkbook[j].get_payto() < checkbook[smallSp].get_payto()){
+                smallSp = j;
+            }
+        }
+
+        tmp = checkbook[i];
+        checkbook[i] = checkbook[smallSp];
+        checkbook[smallSp] = tmp;
+    }
 }
 
 void Checkbook::date_sort(){
-    
+    int i, j, smallSp;
+    Check tmp;
+
+    for (i = 0; i < used - 1; i++){
+        smallSp = i;
+
+        for (j = i + 1; j < used; j++){
+            if (checkbook[j].get_date() < checkbook[smallSp].get_date()){
+                smallSp = j;
+            }
+        }
+
+        tmp = checkbook[i];
+        checkbook[i] = checkbook[smallSp];
+        checkbook[smallSp] = tmp;
+    }
 }
 
 void Checkbook::show(string payto_find){
-
+    for (int i = 0; i < used; i++){
+        if (checkbook[i].get_payto() == payto_find){
+            checkbook[i].output(cout);
+        }
+    }
 }
 
 void Checkbook::save(ostream& outs){
+    outs << balance << endl << endl;
+    outs << next_checknum << endl << endl;
 
+    for (int i = 0; i < used; i++){
+        checkbook[i].output(outs);
+    }
+
+}
+
+double Checkbook::average(){
+    double sum = 0.00;
+    double avg;
+
+    for (int i = 0; i < used; i++){
+        sum += checkbook[i].get_amount();
+    } 
+
+    avg = sum / double(used);
+    return avg;
 }

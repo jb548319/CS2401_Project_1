@@ -59,12 +59,14 @@ void Check::output(std::ostream& outs)const{
 		outs << "Date: " << date << endl;
 		outs << "Payed to: " << payto << endl;
 		outs << "Amount: $" << amount << endl;
+
+		outs << endl;
     }
     else{
-        outs << checknum << endl;
-		outs << date << endl;
-		outs << payto << endl;
-		outs << amount << endl;
+        outs << checknum << endl << endl;
+		outs << date << endl << endl;
+		outs << payto << endl << endl;
+		outs << amount << endl << endl;
     }
 }
 

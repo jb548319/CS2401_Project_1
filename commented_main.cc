@@ -75,22 +75,23 @@ int main(){
 				//mychecks.remove(rmnum);
 				break;
 			case 6:
-				//mychecks.number_sort();
+				mychecks.number_sort();
 				break;
 			case 7:
-				//mychecks.payto_sort();
+				mychecks.payto_sort();
 				break;
 			case 8:
-				//mychecks.date_sort();
+				mychecks.date_sort();
 				break;
 			case 9:
+				cout << "Enter payto to search for: ";
 				while(cin.peek()=='\n' || cin.peek() == '\r')
 					cin.ignore(); // clear out leftover newlines
 				getline(cin,payto_find);
-				//mychecks.show(payto_find);
+				mychecks.show(payto_find);
 				break;
 			case 10:
-				//cout<<mychecks.average();
+				cout << "Check amount average: $"<< mychecks.average() << endl;
 				break;
 			case 0:
 				cout<<"Thank you for using the Checkbook program.\n";
@@ -102,11 +103,11 @@ int main(){
 		} // bottom of the switch
     } while(choice != 0);
 
-	//ofs.open(userfile.c_str());
-	//if(!ofs.fail()){
-		//mychecks.save(ofs);
-	    //ofs.close();
-	//}
+	ofs.open(userfile.c_str());
+	if(!ofs.fail()){
+		mychecks.save(ofs);
+	    ofs.close();
+	}
 
 	return 0;
 }

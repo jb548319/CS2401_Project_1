@@ -24,6 +24,7 @@ class Checkbook{
         void payto_sort();
         void date_sort();
         void show(std::string payto_find);
+        double average();
         void save(std::ostream& outs);     
 
     private:
