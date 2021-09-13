@@ -46,6 +46,10 @@ void Check::write_check(std::istream& ins){
 		getline(ins, payto);
 
 		ins >> amount;
+
+		while (ins.peek() == '\n' || ins.peek() == '\r'){
+			ins.ignore();
+		}
     }
 }
 

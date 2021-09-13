@@ -6,7 +6,7 @@ using namespace std;
 Checkbook::Checkbook (){
     used = 0;
     balance = 0.00;
-    next_checknum = 0;
+    next_checknum = 1;
 }
 
 void Checkbook::load_from_file(istream& ins){
@@ -14,7 +14,7 @@ void Checkbook::load_from_file(istream& ins){
 
     ins >> balance;
     ins >> next_checknum;
-    for (int i = 0; i < (next_checknum - 1); i++){
+    while (!ins.eof()){
         c.write_check(ins);
 
         checkbook[used] = c;
@@ -46,13 +46,28 @@ void Checkbook::write_check(istream& ins){
 
 //
 void Checkbook::show_all(ostream& outs){
-    for (int i = 0; i < used; i++){
+    for (int i = 0; i < used; i++){ 
         checkbook[i].output(outs);
     }
 }
 
 void Checkbook::remove(int rm_num){
+    Check tmp[SIZE];
+    Check c;
+    int tmp_used = 0;
 
+    for (int i = 0; i < used; i++){
+        if (checkbook[i].get_num() != rm_num){
+            tmp[tmp_used] = checkbook[i];
+            tmp_used++;
+        }
+    }
+
+    for (int j = 0; j < tmp_used; j++){
+        checkbook[j] = tmp[j];
+        checkbook[j + 1] = c;
+    }
+    used = tmp_used;
 }
 
 void Checkbook::number_sort(){
@@ -113,10 +128,14 @@ void Checkbook::date_sort(){
 }
 
 void Checkbook::show(string payto_find){
+    int count = 0;
     for (int i = 0; i < used; i++){
         if (checkbook[i].get_payto() == payto_find){
             checkbook[i].output(cout);
         }
+    }
+    if (count == 0){
+        cout << "No checks were made out to that payee." << endl;
     }
 }
 
