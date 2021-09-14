@@ -43,7 +43,7 @@ void Checkbook::write_check(istream& ins){
     used++;
 }
 
-void Checkbook::show_all(ostream& outs){
+void Checkbook::show_all(ostream& outs)const{
     for (int i = 0; i < used; i++){ 
         checkbook[i].output(outs);
     }
@@ -115,7 +115,7 @@ void Checkbook::date_sort(){
     }
 }
 
-void Checkbook::show(string payto_find){
+void Checkbook::show(string payto_find)const{
     int count = 0;
     for (int i = 0; i < used; i++){
         if (checkbook[i].get_payto() == payto_find){
@@ -127,7 +127,7 @@ void Checkbook::show(string payto_find){
     }
 }
 
-void Checkbook::save(ostream& outs){
+void Checkbook::save(ostream& outs)const{
     outs << balance << endl << endl;
     outs << next_checknum << endl << endl;
 
@@ -137,7 +137,7 @@ void Checkbook::save(ostream& outs){
 
 }
 
-double Checkbook::average(){
+double Checkbook::average()const{
     double sum = 0.00;
     double avg;
 
